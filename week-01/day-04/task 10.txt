@@ -1,0 +1,6 @@
+let rtext = ""
+basic.forever(() => {
+    serial.writeLine("yo")
+    rtext = serial.readLine()
+    basic.showString(rtext)
+})

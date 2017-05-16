@@ -1,0 +1,13 @@
+let result = 0
+let length = 0
+let rtext = ""
+serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
+    rtext = serial.readLine()
+    basic.showString(rtext)
+    length = rtext.length - 1
+    for (let index = 0; index <= length; index++) {
+        result += parseInt(rtext.substr(index, 1)) * Math.pow(2, length - index)
+    }
+    serial.writeNumber(result)
+    result = 0
+})

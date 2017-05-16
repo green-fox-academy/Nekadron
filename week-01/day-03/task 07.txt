@@ -1,0 +1,9 @@
+input.onGesture(Gesture.FreeFall, () => {
+    basic.showLeds(`
+        # . . . #
+        . # . # .
+        . . # . .
+        . # . # .
+        # . . . #
+        `)
+})

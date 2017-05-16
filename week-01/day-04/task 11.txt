@@ -1,0 +1,8 @@
+let rtext = ""
+basic.forever(() => {
+    serial.writeLine("yo")
+    rtext = serial.readLine()
+    basic.showString(rtext)
+    radio.setGroup(13)
+    radio.sendString(rtext)
+})

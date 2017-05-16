@@ -1,0 +1,7 @@
+input.onButtonPressed(Button.A, () => {
+    radio.sendString("YO")
+})
+radio.onDataPacketReceived(({receivedString}) => {
+    basic.showString(receivedString)
+})
+radio.setGroup(56)

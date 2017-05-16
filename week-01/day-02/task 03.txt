@@ -1,0 +1,11 @@
+let item = 0
+basic.forever(() => {
+    item = 4
+    basic.showNumber(item)
+    item += 1
+    basic.showNumber(item)
+    item += 1
+    basic.showNumber(item)
+    item += 1
+    basic.showNumber(item)
+})

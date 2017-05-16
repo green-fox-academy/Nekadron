@@ -1,0 +1,41 @@
+let y = 0
+let x = 0
+let leftright = 0
+let uppdown = 0
+basic.forever(() => {
+    basic.clearScreen()
+    uppdown = input.rotation(Rotation.Pitch)
+    leftright = input.rotation(Rotation.Roll)
+    if (-30 <= leftright && -20 > leftright) {
+        x = 0
+    }
+    if (-30 <= uppdown && uppdown < -20) {
+        y = 0
+    }
+    if (-20 <= leftright && leftright < -10) {
+        x = 1
+    }
+    if (-20 <= uppdown && uppdown < -10) {
+        y = 1
+    }
+    if (-10 <= leftright && leftright < 10) {
+        x = 2
+    }
+    if (-10 <= uppdown && uppdown < 10) {
+        y = 2
+    }
+    if (10 <= leftright && leftright < 20) {
+        x = 3
+    }
+    if (10 <= uppdown && uppdown < 20) {
+        y = 3
+    }
+    if (20 <= leftright && leftright < 30) {
+        x = 4
+    }
+    if (20 <= uppdown && uppdown < 30) {
+        y = 4
+    }
+    led.plot(Math.abs(x - 4), Math.abs(y - 4))
+    basic.pause(100)
+})
