@@ -1,3 +1,23 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Gist
+ @Nekadron
+ Sign out
+ Watch 9
+  Unstar 2
+ Fork 1 greenfox-academy/totoro-syllabus Private
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki Insights 
+Branch: master Find file Copy pathtotoro-syllabus/.gitignore
+65408e8  5 minutes ago
+@koincidencia koincidencia feat(hw-totoro-gitignore): remove eclipse
+1 contributor
+RawBlameHistory     
+95 lines (73 sloc)  1.1 KB
+
 # Created by https://www.gitignore.io/api/c,eclipse,atmelstudio
 
 ### AtmelStudio ###
@@ -77,60 +97,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-### Eclipse ###
-
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.recommenders
-
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# PyDev specific (Python IDE for Eclipse)
-*.pydevproject
-
-# CDT-specific (C/C++ Development Tooling)
-.cproject
-
-# Java annotation processor (APT)
-.factorypath
-
-# PDT-specific (PHP Development Tools)
-.buildpath
-
-# sbteclipse plugin
-.target
-
-# Tern plugin
-.tern-project
-
-# TeXlipse plugin
-.texlipse
-
-# STS (Spring Tool Suite)
-.springBeans
-
-# Code Recommenders
-.recommenders/
-
-# Scala IDE specific (Scala & Java development for Eclipse)
-.cache-main
-.scala_dependencies
-.worksheet
-
-# End of https://www.gitignore.io/api/c,eclipse,atmelstudio
-
 
 # Created by https://www.gitignore.io/api/codeblocks
 
@@ -145,3 +111,5 @@ bin/
 obj/
 
 # End of https://www.gitignore.io/api/codebloc
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
