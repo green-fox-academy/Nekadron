@@ -4,27 +4,6 @@
 #include "lcd_log.h"
 #include "cmsis_os.h"
 
-struct row_and_col {
-	GPIO_TypeDef * letter;
-	uint16_t number;
-};
-
-struct row_and_col data[] = {
-		//sorok sorrendben
-	{GPIOG, GPIO_PIN_7},
-	{GPIOH, GPIO_PIN_6},
-	{GPIOB, GPIO_PIN_4},
-	{GPIOI, GPIO_PIN_0},
-	{GPIOG, GPIO_PIN_6},
-	{GPIOC, GPIO_PIN_7},
-	{GPIOC, GPIO_PIN_6},
-	//oszlopok balról jobbra
-	{GPIOI, GPIO_PIN_2},
-	{GPIOB, GPIO_PIN_15},
-	{GPIOA, GPIO_PIN_8},
-	{GPIOI, GPIO_PIN_3},
-	{GPIOA, GPIO_PIN_15},
-};
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -98,7 +77,7 @@ void led_matrix_update_thread(void const *argument)
 
 	led_matr.Pin = GPIO_PIN_7;
 	HAL_GPIO_Init(GPIOG, &led_matr);
-	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, GPIO_PIN_RESET);	// pin D4 - 9-es sor
+	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, GPIO_PIN_RESET);	// pin D4 - 9-es oszlop
 
 	led_matr.Pin = GPIO_PIN_0;
 	HAL_GPIO_Init(GPIOI, &led_matr);
@@ -113,7 +92,7 @@ void led_matrix_update_thread(void const *argument)
 	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_3, GPIO_PIN_RESET);	// pin D7 - 10-es oszlop
 
 	led_matr.Pin = GPIO_PIN_2;
-	HAL_GPIO_Init(GPIOI, &led_matr);
+	HAL_GPIO_Init(GPIOA, &led_matr);
 	HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);	// pin D8 - 13-as oszlop
 
 	led_matr.Pin = GPIO_PIN_15;
@@ -134,49 +113,48 @@ void led_matrix_update_thread(void const *argument)
 	led_matrix_mutex_id = osMutexCreate (osMutex(LED_MATRIX_MUTEX_DEF));
 	LCD_UsrLog("led_matrix - initialized\n");
 
-	for (int c = 0; c < LED_MATRIX_ROWS; c++) {
-		HAL_GPIO_WritePin (data[c].letter, data[c].number, GPIO_PIN_SET);
-	}
-
 	// Infinite loop
 	while (1) {
 		// TODO:
 		// Implement the led matrix updater functionality
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_SET);	// pin D11 - 3-as oszlop
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, GPIO_PIN_SET);	// pin D4 - 9-es oszlop
+		HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, GPIO_PIN_SET);	// pin D6 - 14-es sor
+		HAL_GPIO_WritePin(GPIOI, GPIO_PIN_0, GPIO_PIN_SET);	// pin D5 - 12-es sor
+		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, GPIO_PIN_SET);	// pin D2 - 1-es sor
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_SET);	// pin D0 - 7-es sor
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_SET);	// pin D1 - 2-es sor
+
+
+
 		// Step 1:
 		// Iterate through every column or row
-		for (int i = 7; i < LED_MATRIX_COLS + 7; i++) {
-
+		for (int i = 0; i < LED_MATRIX_COLS; i++) {
 
 			// Step 2:
 			// Wait for the mutex
-			osMutexWait(led_matrix_mutex_id, osWaitForever);
+		osMutexWait(led_matrix_mutex_id, osWaitForever);
 
 			// Step 3:
 			// Turn on the column or row
-			HAL_GPIO_WritePin (data[i].letter, data[i].number, GPIO_PIN_SET);	//elsõ oszlop
+
 
 			// Step 4:
 			// Turn on the leds in that column or row
-			/*for (int j = 0; j < LED_MATRIX_ROWS; j++) {
-				HAL_GPIO_WritePin (data[j].letter, data[j].number, GPIO_PIN_RESET);
-				osDelay(100);
-				HAL_GPIO_WritePin (data[j].letter, data[j].number, GPIO_PIN_SET);
-			}*/
-			HAL_GPIO_WritePin(GPIOG, GPIO_PIN_7, led_matrix_state[0][i]);
-			HAL_GPIO_WritePin(GPIOH, GPIO_PIN_6, led_matrix_state[1][i]);
+		for (int j = 0; j < LED_MATRIX_ROWS; j++) {
+
+		}
 
 			// Step 5:
 			// Release the mutex
-			osMutexRelease(led_matrix_mutex_id);
+
 
 			// Step 6:
 			// Delay
-			osDelay(100);
+
 
 			// Step 7:
 			// Turn off the column or row
-			HAL_GPIO_WritePin (data[i].letter, data[i].number, GPIO_PIN_RESET);	//elsõ oszlop
-		}
 	}
 
 	// Terminating thread
